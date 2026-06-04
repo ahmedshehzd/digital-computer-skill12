@@ -16,6 +16,46 @@ function showTeacherLogin(){
     document.getElementById("teacherLogin").classList.remove("hidden");
 }
 
+/* ================= 🔥 REGISTER FIX ADDED ================= */
+function showStudentRegister(){
+    hideAll();
+    document.getElementById("studentRegister").classList.remove("hidden");
+}
+
+function registerStudent(){
+
+    let name = document.getElementById("regName").value;
+    let phone = document.getElementById("regPhone").value;
+    let email = document.getElementById("regEmail").value;
+    let password = document.getElementById("regPassword").value;
+
+    if(!name || !email || !password){
+        alert("Please fill all required fields");
+        return;
+    }
+
+    let exists = students.find(s => s.email === email);
+
+    if(exists){
+        alert("Account already exists");
+        return;
+    }
+
+    students.push({
+        name,
+        phone,
+        email,
+        password
+    });
+
+    localStorage.setItem("students", JSON.stringify(students));
+
+    alert("Account Created Successfully");
+
+    showStudentLogin();
+}
+
+/* ================= LOGIN ================= */
 function loginStudent(){
 
     let email = document.getElementById("loginEmail").value;
@@ -60,7 +100,7 @@ function showTeacher(){
     home();
 }
 
-/* ================= HOME TOGGLE + DESIGN ================= */
+/* ================= HOME ================= */
 function home(){
 
     homeToggle = !homeToggle;
@@ -137,13 +177,14 @@ function saveLecture(){
     home();
 }
 
-/* ================= 🔥 FIXED FEEDBACK SYSTEM ================= */
+/* ================= FEEDBACK ================= */
 function sendFeedback(index, status){
 
     let lectureTitle = lectures[index].title;
 
-    // update or replace old feedback
-    feedback = feedback.filter(f => !(f.student === currentUser.name && f.lecture === lectureTitle));
+    feedback = feedback.filter(f =>
+        !(f.student === currentUser.name && f.lecture === lectureTitle)
+    );
 
     feedback.push({
         student: currentUser.name,
@@ -159,7 +200,6 @@ function sendFeedback(index, status){
 
     showFeedbackAnimation(status);
 
-    // LOCK BUTTON AFTER CLICK
     let buttons = document.querySelectorAll(`[onclick*="sendFeedback(${index}"]`);
 
     buttons.forEach(b=>{
@@ -177,7 +217,7 @@ function sendFeedback(index, status){
     });
 }
 
-/* ================= 🎬 ANIMATION POPUP ================= */
+/* ================= ANIMATION ================= */
 function showFeedbackAnimation(status){
 
     let box = document.createElement("div");
@@ -198,21 +238,17 @@ function showFeedbackAnimation(status){
 
     document.body.appendChild(box);
 
-    setTimeout(()=>{
-        box.style.transform = "translate(-50%,-50%) scale(1)";
-    },10);
+    setTimeout(()=> box.style.transform = "translate(-50%,-50%) scale(1)", 10);
 
     setTimeout(()=>{
         box.style.transform = "translate(-50%,-50%) scale(0)";
         box.style.opacity = "0";
     },1200);
 
-    setTimeout(()=>{
-        box.remove();
-    },1600);
+    setTimeout(()=> box.remove(),1600);
 }
 
-/* ================= 🔔 NOTIFICATIONS ================= */
+/* ================= NOTIFICATIONS ================= */
 function updateBell(){
 
     let bell = document.getElementById("bellCount");
@@ -252,7 +288,6 @@ function toggleNotifications(){
 
     box.innerHTML = html;
 
-    // mark all as read when opened
     feedback.forEach(f => f.read = true);
     localStorage.setItem("feedback", JSON.stringify(feedback));
     updateBell();
@@ -317,7 +352,6 @@ function studentsList(){
 function toggleStudent(i){
 
     let box = document.getElementById("stu_"+i);
-
     box.style.display = (box.style.display === "block") ? "none" : "block";
 }
 
@@ -335,6 +369,7 @@ function hideAll(){
     document.getElementById("loginBox").classList.add("hidden");
     document.getElementById("studentLogin").classList.add("hidden");
     document.getElementById("teacherLogin").classList.add("hidden");
+    document.getElementById("studentRegister").classList.add("hidden");
     document.getElementById("studentDash").classList.add("hidden");
     document.getElementById("teacherDash").classList.add("hidden");
 }
