@@ -1,0 +1,84 @@
+body{
+    margin:0;
+    font-family:Arial;
+}
+
+.bg{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    /* 🖥️ NEW COMPUTER / TECH BACKGROUND */
+    background:url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80")
+    no-repeat center/cover;
+}
+
+.glass{
+    width:320px;
+    padding:25px;
+    text-align:center;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    color:white;
+    border-radius:15px;
+}
+
+.dashboard{
+    width:90%;
+    height:90vh;
+    overflow:auto;
+    background:rgba(0,0,0,0.6);
+    color:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+.topbar{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#00c6ff;
+    color:white;
+    cursor:pointer;
+}
+
+.hidden{display:none;}
+.success-popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#00c853;
+    color:white;
+    padding:20px 30px;
+    border-radius:12px;
+    font-size:20px;
+    display:none;
+    z-index:9999;
+    animation:pop 0.5s ease;
+}
+
+@keyframes pop{
+    from{transform:translate(-50%,-50%) scale(0.5); opacity:0;}
+    to{transform:translate(-50%,-50%) scale(1); opacity:1;}
+}
+
+.disabled-btn{
+    opacity:0.5;
+    pointer-events:none;
+}
