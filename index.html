@@ -30,6 +30,29 @@
 
     <button onclick="loginStudent()">Login</button>
 
+    <!-- 🔥 ADDED: REGISTER LINK -->
+    <p onclick="showStudentRegister()" style="cursor:pointer;color:lightblue;">
+        Create New Account
+    </p>
+
+</div>
+
+<!-- 🔥 ADDED: STUDENT REGISTER -->
+<div id="studentRegister" class="glass hidden">
+
+    <h2>Student Register</h2>
+
+    <input type="text" id="regName" placeholder="Full Name">
+    <input type="text" id="regPhone" placeholder="Phone">
+    <input type="email" id="regEmail" placeholder="Email">
+    <input type="password" id="regPassword" placeholder="Password">
+
+    <button onclick="registerStudent()">Create Account</button>
+
+    <p onclick="showStudentLogin()" style="cursor:pointer;color:lightblue;">
+        Already have account? Login
+    </p>
+
 </div>
 
 <!-- TEACHER LOGIN -->
@@ -68,7 +91,7 @@
         <button onclick="createLecture()">Create Lecture</button>
         <button onclick="studentsList()">Students</button>
 
-        <!-- 🔔 ADD: NOTIFICATION BELL (ONLY ADDITION) -->
+        <!-- 🔔 NOTIFICATION -->
         <button onclick="toggleNotifications()" style="position:relative;">
             🔔
             <span id="bellCount" style="
@@ -87,13 +110,15 @@
 
     </div>
 
-    <!-- 🔔 ADD: NOTIFICATION BOX (ONLY ADDITION) -->
+    <!-- NOTIFICATION BOX -->
     <div id="notifBox" style="
         display:none;
         position:absolute;
         right:20px;
         top:80px;
         width:260px;
+        max-height:250px;
+        overflow-y:auto;
         background:white;
         color:black;
         border-radius:10px;
